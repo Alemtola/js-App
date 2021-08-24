@@ -33,11 +33,11 @@ let pokemonList = [
 ]
 
 // a loop which lists each pokemon name with thier respective height
-// gives a special lebel when height is more than 2
-for (let i = 0; i < pokemonList.length; i++) {
-  if (pokemonList[i].height > 2) {
-    document.write('<p>' + pokemonList[i].name + ' (height:' + pokemonList[i].height + ')' + ' -Wow that is big! </p>'  );
+// gives a special lebel when height is greater than 2
+pokemonList.forEach(function(pokemon) {
+  if (pokemon.height > 2) {
+    document.write('<p>' + pokemon.name + ' (height:' + pokemon.height + ')' + ' -Wow that is big! </p>'  );
     } else {
-    document.write('<p>' + pokemonList[i].name + ' (height:' + pokemonList[i].height + ')</p>');
+    document.write('<p>' + pokemon.name + ' (height:' + pokemon.height + ')</p>');
   }
-}
+});
