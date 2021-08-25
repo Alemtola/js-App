@@ -56,7 +56,7 @@ pokemonRepository.add (
 
 // a loop which lists each pokemon name with thier respective height
 // gives a special lebel when height is greater than 2
-pokemonRepository.forEach(function(pokemon) {
+pokemonRepository.getAll().forEach(function(pokemon) {
   if (pokemon.height > 2) {
     document.write('<p>' + pokemon.name + ' (height:' + pokemon.height + ')' + ' -Wow that is big! </p>'  );
     } else {
