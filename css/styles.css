@@ -1,0 +1,26 @@
+body {
+  background-color: #f0f8ff; /* AliceBlue */
+}
+
+h1 {
+text-align: center;
+}
+
+.pokemon-list {
+  list-style-type: none;
+}
+
+.pokemon-list li {
+  display: inline-block;
+  margin: 6px 8px;
+}
+
+.button-class {
+  background-color: #008080; /* Teal */
+  color: #fff; /* White */
+  padding: 20px 30px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+}
