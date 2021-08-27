@@ -1,5 +1,5 @@
 
-// list of pokemon
+
 let pokemonRepository = (function () {
   let pokemonList = [
     {
@@ -41,25 +41,38 @@ let pokemonRepository = (function () {
     return pokemonList;
   }
 
+  function showDetails(pokemon){
+   console.log(pokemon);
+  }
+
+  function addListItem(pokemon){
+    let pokemonUl = document.querySelector('.pokemon-list');
+    let pokemonItem = document.createElement('li');
+    let button = document.createElement('button');
+    button.innerText = pokemon.name;
+    button.classList.add('button-class');
+    pokemonItem.appendChild(button);
+    pokemonUl.appendChild(pokemonItem);
+
+    button.addEventListener('Click', showDetails(pokemon));
+  }
+
   return {
     add: add,
-    getAll: getAll
+    getAll: getAll,
+    addListItem: addListItem
   };
 }) ();
 
 pokemonRepository.add (
   {
     name:'Metapod',
-    height: 0.7
+    height: 0.7,
+    type: ['bug']
   }
 );
 
-// a loop which lists each pokemon name with thier respective height
-// gives a special lebel when height is greater than 2
+// a loop which lists each pokemon
 pokemonRepository.getAll().forEach(function(pokemon) {
-  if (pokemon.height > 2) {
-    document.write('<p>' + pokemon.name + ' (height:' + pokemon.height + ')' + ' -Wow that is big! </p>'  );
-    } else {
-    document.write('<p>' + pokemon.name + ' (height:' + pokemon.height + ')</p>');
-  }
+  pokemonRepository.addListItem(pokemon);
 });
