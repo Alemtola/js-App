@@ -8,6 +8,7 @@ text-align: center;
 
 .pokemon-list {
   list-style-type: none;
+  text-align: center;
 }
 
 .pokemon-list li {
