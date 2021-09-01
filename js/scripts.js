@@ -1,37 +1,8 @@
 
 
 let pokemonRepository = (function () {
-  let pokemonList = [
-    {
-      name: 'Venusaur',
-      height: 1,
-      type: ['grass', 'poison']
-    },
-
-    {
-      name: 'Charizard',
-      height: 2,
-      type: ['fire', 'flying']
-    },
-
-    {
-      name: 'Beedrill',
-      height: 1,
-      type: ['bug', 'poison']
-    },
-
-    {
-      name: 'Pidgeot',
-      height: 3,
-      type: ['flying', 'normal']
-    },
-
-    {
-      name: 'Nidoking',
-      height: 1,
-      type: ['ground', 'poison']
-    }
-  ];
+  let pokemonList = [];
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
   function add(newPokemon) {
     pokemonList.push(newPokemon);
@@ -41,9 +12,6 @@ let pokemonRepository = (function () {
     return pokemonList;
   }
 
-  function showDetails(pokemon){
-   console.log(pokemon);
-  }
 
   function addListItem(pokemon){
     let pokemonUl = document.querySelector('.pokemon-list');
@@ -53,28 +21,64 @@ let pokemonRepository = (function () {
     button.classList.add('button-class');
     pokemonItem.appendChild(button);
     pokemonUl.appendChild(pokemonItem);
-
-    button.addEventListener('Click', function(){
+    button.addEventListener('Click', function(event){
       showDetails(pokemon);
     });
   }
 
+  //loads list of all pokemon from the pokedex api
+  function loadList() {
+    return fetch(apiUrl).then(function (response) {
+      return response.json();
+    }).then(function (json) {
+      json.results.forEach(function (item) {
+        let pokemon = {
+          name: item.name,
+          detailsUrl: item.url
+        };
+        add(pokemon);
+        console.log(pokemon);
+      });
+    }).catch(function (e) {
+      console.error(e);
+    })
+  }
+
+  //loads the details for all pokemon from the pokedex api
+  function loadDetails(item) {
+   let url = item.detailsUrl;
+   return fetch(url).then(function (response) {
+     return response.json();
+   }).then(function (details) {
+     // add the details to the item
+     item.imageUrl = details.sprites.front_default;
+     item.height = details.height;
+     item.types = details.types;
+   }).catch(function (e) {
+     console.error(e);
+   });
+ }
+
+ function showDetails(item){
+   pokemonRepository.loadDetails(item).then(function () {
+       console.log(item);
+     });
+ }
+
   return {
     add: add,
     getAll: getAll,
-    addListItem: addListItem
+    addListItem: addListItem,
+    loadList: loadList,
+    loadDetails: loadDetails,
+    showDetails: showDetails
   };
 }) ();
 
-pokemonRepository.add (
-  {
-    name:'Metapod',
-    height: 0.7,
-    type: ['bug']
-  }
-);
 
-// a loop which lists each pokemon
-pokemonRepository.getAll().forEach(function(pokemon) {
-  pokemonRepository.addListItem(pokemon);
+// iterates over each pokemon
+pokemonRepository.loadList().then(function (){
+  pokemonRepository.getAll().forEach(function(pokemon) {
+    pokemonRepository.addListItem(pokemon);
+  });
 });
