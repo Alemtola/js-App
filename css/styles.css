@@ -12,14 +12,16 @@ text-align: center;
 }
 
 .pokemon-list li {
-  display: inline-block;
-  margin: 6px 8px;
+  display: block;
+  margin: 6px auto;
 }
 
 .button-class {
   background-color: #008080; /* Teal */
   color: #fff; /* White */
-  padding: 20px 30px;
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
   text-align: center;
   text-decoration: none;
   font-size: 16px;
