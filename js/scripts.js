@@ -21,7 +21,7 @@ let pokemonRepository = (function () {
     button.classList.add('button-class');
     pokemonItem.appendChild(button);
     pokemonUl.appendChild(pokemonItem);
-    button.addEventListener('Click', function(event){
+    button.addEventListener('click', function(event){
       showDetails(pokemon);
     });
   }
