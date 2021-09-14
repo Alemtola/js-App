@@ -1,30 +1,49 @@
-body {
-  background-color: #f0f8ff; /* AliceBlue */
+:root {
+  --AliceBlue: #f0f8ff;
+  --Teal: #008080;
+  --YellowGreen: #9ACD32;
+  --White: #fff;
 }
 
-h1 {
-text-align: center;
+body {
+
+  background-color: var(--AliceBlue);
+  text-align: center;
+}
+
+.body-title {
+  text-align: center;
+  color: var(--YellowGreen);
+}
+
+.navbar {
+  background-color: var(--YellowGreen);
+  margin: 10px 10px 40px 10px;
 }
 
 .pokemon-list {
+  display: inline-block;
+  max-width: 1200px;
   list-style-type: none;
   text-align: center;
 }
 
 .pokemon-list li {
-  display: block;
-  width: 100%;
-  margin: 6px auto;
+  display: inline-block;
+  text-align: center;
+  width: 200px;
+  margin: 15px 20px;
 }
 
 .button-class {
-  background-color: #008080; /* Teal */
-  color: #fff; /* White */
+  background-color: var(--Teal);
+  color: var(--White);
   width: 100%;
   padding: 20px;
   text-align: center;
   text-decoration: none;
   font-size: 16px;
+  border-radius: 40px;
 }
 
 .button-class:hover {
@@ -34,6 +53,7 @@ text-align: center;
 
 .modal-content{
   text-align: center;
+  background: var(--YellowGreen);
 }
 
 .modal-title {
